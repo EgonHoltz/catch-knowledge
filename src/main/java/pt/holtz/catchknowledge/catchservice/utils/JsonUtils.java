@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
+import pt.holtz.catchknowledge.catchservice.model.Activity;
 import pt.holtz.catchknowledge.catchservice.model.Student;
 import pt.holtz.catchknowledge.catchservice.model.StudentAnswer;
 
@@ -44,6 +47,24 @@ public class JsonUtils {
 		
 		return qttObjects;
 		
+	}
+
+	public static List<Object> produceQualityMap(String activityID, Student student) {
+		List<Object> qltObjects = new ArrayList<Object>();
+		Map<String,String> studentMap = new HashMap<String, String>();
+		String studentUrl = ServletUriComponentsBuilder
+				.fromCurrentServletMapping()
+				.toUriString() + "?APAnID=" + student.getInveniraStdID();
+		studentMap.put("Student activity profile", studentUrl);
+		Map<String,String> activityMap = new HashMap<String, String>();
+		String activityUrl = ServletUriComponentsBuilder
+				.fromCurrentServletMapping()
+				.toUriString() + "?APAnID=" + Activity.getInstance().getActivityID();
+		activityMap.put("Actitivy Heat Map", activityUrl);
+		qltObjects.add(studentMap);
+		qltObjects.add(activityMap);
+		
+		return qltObjects;
 	}
 	
 }

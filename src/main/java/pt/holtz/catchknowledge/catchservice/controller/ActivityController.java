@@ -61,7 +61,7 @@ public class ActivityController {
 		for (Student student : students) {
 			response.put("inveniraStdID", student.getInveniraStdID());
 			response.put("quantAnalytics", JsonUtils.produceQuantitativeMap(student));
-			response.put("qualAnalytics", "qualAnalytics");
+			response.put("qualAnalytics", JsonUtils.produceQualityMap(activityID,student));
 		}
 		
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
