@@ -13,8 +13,8 @@ public class ActivityConfigResponse {
 	private String analytics;
 	
 	public ActivityConfigResponse() {
-		this.activityID = Activity.getInstance().getActivityId();
-		this.activityName = Activity.getInstance().getName();
+		this.activityID = Activity.getInstance().getActivityID();
+		this.activityName = Activity.getInstance().getActivityName();
 		this.configUrl = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"/files/form.html";
 		this.jsonParams = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"f/iles/config_fields.json";
 		this.userUrl = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"/files/student.html";

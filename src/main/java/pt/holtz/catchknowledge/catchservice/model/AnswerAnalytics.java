@@ -1,24 +1,25 @@
 package pt.holtz.catchknowledge.catchservice.model;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;
 
 public class AnswerAnalytics {
-	private LocalTime durationTime;
-	private LocalTime idleTime;
+	private Duration durationTime;
+	private Duration idleTime;
 	private long changedPage;
 	private List<String> selectedTexts;
 	
-	public LocalTime getDurationTime() {
+	public Duration getDurationTime() {
 		return durationTime;
 	}
-	public void setDurationTime(LocalTime durationTime) {
+	public void setDurationTime(Duration durationTime) {
 		this.durationTime = durationTime;
 	}
-	public LocalTime getIdleTime() {
+	public Duration getIdleTime() {
 		return idleTime;
 	}
-	public void setIdleTime(LocalTime idleTime) {
+	public void setIdleTime(Duration idleTime) {
 		this.idleTime = idleTime;
 	}
 	public long getChangedPage() {
