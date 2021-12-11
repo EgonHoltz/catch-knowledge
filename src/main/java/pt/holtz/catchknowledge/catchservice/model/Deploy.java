@@ -4,16 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 public class Deploy {
-	//@JsonProperty("activityID")
-	//private String activityID;
 	private Student student;
 	@JsonProperty("Inven!RAstdID")
 	private String inveniraStdId;
 	@JsonUnwrapped
 	private Activity activity;
-	//@JsonProperty("json_params")
-	//@JsonUnwrapped
-	//private Article article;
 	
 	public Deploy() {
 	}

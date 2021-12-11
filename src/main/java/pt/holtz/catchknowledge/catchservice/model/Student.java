@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.util.CollectionUtils;
 
@@ -40,17 +41,17 @@ public class Student {
 			this.articles = new ArrayList<Article>();
 		}
 		this.articles.add(article);
-		// everytime that a Student add an Article, 
+		// every time that a Student add an Article, 
 		// a fake analytics will be added
 		ArrayList<Question> questions= article.getQuestions();
 		if (!CollectionUtils.isEmpty(questions)) {
 			for (Question question : questions) {
 				StudentAnswer stdAnswer = new StudentAnswer(question);
-				stdAnswer.setAnswer("bla bla bla bla "+((int)Math.random()*(50-1+1)+1));
+				stdAnswer.setAnswer("bla bla bla bla "+(1L + (long) (Math.random() * (50L - 1L))));
 				AnswerAnalytics answAnalytics = new AnswerAnalytics();
-				answAnalytics.setChangedPage((long)Math.random()*(50-1+1)+1);
-				answAnalytics.setDurationTime(Duration.ofMinutes((int)Math.random()*(120-1+1)+1));
-				answAnalytics.setIdleTime(Duration.ofMinutes((int)Math.random()*(120-1+1)+1));
+				answAnalytics.setChangedPage((1L + (long) (Math.random() * (50L - 1L))));
+				answAnalytics.setDurationTime(Duration.ofMinutes((1 + (int) (Math.random() * (50 - 1)))));
+				answAnalytics.setIdleTime(Duration.ofMinutes((1 + (int) (Math.random() * (50 - 1)))));
 				stdAnswer.setAnswerAnalytics(answAnalytics);
 				this.studentAnswers.add(stdAnswer);
 			}

@@ -20,11 +20,14 @@ import pt.holtz.catchknowledge.catchservice.model.Activity;
 import pt.holtz.catchknowledge.catchservice.model.ActivityConfigResponse;
 import pt.holtz.catchknowledge.catchservice.model.Deploy;
 import pt.holtz.catchknowledge.catchservice.model.Student;
+import pt.holtz.catchknowledge.catchservice.service.ActivityService;
 import pt.holtz.catchknowledge.catchservice.service.InMemoryActivityService;
 import pt.holtz.catchknowledge.catchservice.utils.JsonUtils;
 
 @RestController
 public class ActivityController {
+	
+	ActivityService activityService = InMemoryActivityService.getInstance();
 
 	//in: nothing
 	//out: invenira configs -> activity id, activity name, configUrl, jsonParams, userUrl and analytics
@@ -42,7 +45,7 @@ public class ActivityController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> receiveActivityDeploy(@RequestBody Deploy deploy) throws JsonProcessingException{
 		deploy.toString();
-		Student student = InMemoryActivityService.getInstance().addStudent(deploy.getInveniraStdId());
+		Student student = activityService.addStudent(deploy.getInveniraStdId());
 		Activity activity = deploy.getActivity();
 		student.addArticle(activity.getArticle());
 		
@@ -56,7 +59,7 @@ public class ActivityController {
 	
 	@PostMapping(path="/iap")
 	public ResponseEntity<Map<String,Object>> displayActivityAnalytics(@RequestBody String activityID){
-		Collection<Student> students = InMemoryActivityService.getInstance().findAllStudents();
+		Collection<Student> students = activityService.findAllStudents();
 		Map<String,Object> response = new HashMap<String, Object>();
 		for (Student student : students) {
 			response.put("inveniraStdID", student.getInveniraStdID());

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
 import pt.holtz.catchknowledge.catchservice.model.Activity;
+import pt.holtz.catchknowledge.catchservice.model.AnswerAnalytics;
 import pt.holtz.catchknowledge.catchservice.model.Student;
 import pt.holtz.catchknowledge.catchservice.model.StudentAnswer;
 
@@ -27,42 +28,36 @@ public class JsonUtils {
 	public static List<Object> produceQuantitativeMap(Student student){
 		List<Object> qttObjects = new ArrayList<Object>();
 		for (StudentAnswer stdAnswer : student.getStudentAnswers()){
-			Map<String,String> durationTimeMap = new HashMap<String, String>();
-			durationTimeMap.put("name", "Tempo de duração na atividade");
-			durationTimeMap.put("value", stdAnswer.getAnswerAnalytics().getDurationTime().toString());
-			Map<String,String> idleTimeMap = new HashMap<String, String>();
-			idleTimeMap.put("name", "Tempo Inactivo durante a atividade");
-			idleTimeMap.put("value", stdAnswer.getAnswerAnalytics().getIdleTime().toString());
-			Map<String,Object> changedPageMap = new HashMap<String, Object>();
-			changedPageMap.put("name", "Alterações de tela durante atividade");
-			changedPageMap.put("value", stdAnswer.getAnswerAnalytics().getChangedPage());
-			Map<String,Object> questionMap = new HashMap<String, Object>();
-			questionMap.put("name", "Pergunta");
-			questionMap.put("value", stdAnswer.getQuestion().getQuestionStr());
-			qttObjects.add(questionMap);
-			qttObjects.add(changedPageMap);
-			qttObjects.add(idleTimeMap);
-			qttObjects.add(durationTimeMap);
+			AnswerAnalytics aa = stdAnswer.getAnswerAnalytics();
+			extractToMap("Tempo de duração na atividade",aa.getDurationTime().toString(),qttObjects);
+			extractToMap("Tempo de duração na atividade",aa.getIdleTime().toString(),qttObjects);
+			extractToMap("Alterações de tela durante atividade",String.valueOf(aa.getChangedPage()),qttObjects);
+			extractToMap("Pergunta",stdAnswer.getQuestion().getQuestionStr(),qttObjects);
 		}
 		
 		return qttObjects;
 		
 	}
 
+	private static void extractToMap(String strName,String strValue,List<Object> qttObjects) {
+		Map<String,String> mapParam = new HashMap<String, String>();
+		mapParam.put("name", strName);
+		mapParam.put("value", strValue);
+		qttObjects.add(mapParam);
+	}
+
 	public static List<Object> produceQualityMap(String activityID, Student student) {
 		List<Object> qltObjects = new ArrayList<Object>();
-		Map<String,String> studentMap = new HashMap<String, String>();
+
 		String studentUrl = ServletUriComponentsBuilder
 				.fromCurrentServletMapping()
 				.toUriString() + "?APAnID=" + student.getInveniraStdID();
-		studentMap.put("Student activity profile", studentUrl);
-		Map<String,String> activityMap = new HashMap<String, String>();
+		extractToMap("Student activity profile", studentUrl, qltObjects);
+
 		String activityUrl = ServletUriComponentsBuilder
 				.fromCurrentServletMapping()
 				.toUriString() + "?APAnID=" + Activity.getInstance().getActivityID();
-		activityMap.put("Actitivy Heat Map", activityUrl);
-		qltObjects.add(studentMap);
-		qltObjects.add(activityMap);
+		extractToMap("Actitivy Heat Map", activityUrl, qltObjects);
 		
 		return qltObjects;
 	}
