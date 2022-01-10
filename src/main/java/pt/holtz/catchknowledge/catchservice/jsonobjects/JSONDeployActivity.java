@@ -1,16 +1,21 @@
-package pt.holtz.catchknowledge.catchservice.model;
+package pt.holtz.catchknowledge.catchservice.jsonobjects;
+
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
-public class Deploy {
+import pt.holtz.catchknowledge.catchservice.model.Activity;
+import pt.holtz.catchknowledge.catchservice.model.Student;
+
+public class JSONDeployActivity {
 	private Student student;
 	@JsonProperty("Inven!RAstdID")
 	private String inveniraStdId;
 	@JsonUnwrapped
 	private Activity activity;
 	
-	public Deploy() {
+	public JSONDeployActivity() {
 	}
 
 	public String getInveniraStdId() {
@@ -40,7 +45,5 @@ public class Deploy {
 	public String toString() {
 		return "Deploy [inveniraStdId=" + inveniraStdId + "]";
 	}
-	
-	
 
 }

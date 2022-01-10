@@ -1,10 +1,10 @@
-package pt.holtz.catchknowledge.catchservice.model;
-
-import java.util.List;
+package pt.holtz.catchknowledge.catchservice.jsonobjects;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-public class ActivityConfigResponse {
+import pt.holtz.catchknowledge.catchservice.model.Activity;
+
+public class JSONConfigParameters {
 	private String activityID;
 	private String activityName;
 	private String configUrl;
@@ -12,7 +12,8 @@ public class ActivityConfigResponse {
 	private String userUrl;
 	private String analytics;
 	
-	public ActivityConfigResponse() {
+	
+	public JSONConfigParameters() {
 		this.activityID = Activity.getInstance().getActivityID();
 		this.activityName = Activity.getInstance().getActivityName();
 		this.configUrl = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"/files/form.html";
@@ -54,5 +55,4 @@ public class ActivityConfigResponse {
 	public String getActivityID() {
 		return activityID;
 	}	
-	
 }
