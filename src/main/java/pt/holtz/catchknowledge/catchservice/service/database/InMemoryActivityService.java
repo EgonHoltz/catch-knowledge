@@ -1,5 +1,6 @@
-package pt.holtz.catchknowledge.catchservice.service;
+package pt.holtz.catchknowledge.catchservice.service.database;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +17,7 @@ public class InMemoryActivityService implements ActivityService {
 	
 	private Map<String,Student> students;
 	private Map<String,Article> articles;
+	private Map<String,String> log;
 	private static final ActivityService instance = new InMemoryActivityService();
 	
 	public static ActivityService getInstance() {
@@ -25,6 +27,7 @@ public class InMemoryActivityService implements ActivityService {
 	private InMemoryActivityService() {
 		students = new ConcurrentHashMap<>();
 		articles = new ConcurrentHashMap<>();
+		log = new ConcurrentHashMap<>();
 	}
 	
 	@Override
@@ -54,6 +57,16 @@ public class InMemoryActivityService implements ActivityService {
 	@Override
 	public Collection<Student> findAllStudents() {
 		return students.values();
+	}
+
+	@Override
+	public void addLogToApplication(String service, String method, String data) {
+		log.put(Instant.now()+" - "+service, method+data);
+	}
+
+	@Override
+	public Map<String, String> retrieveAllLogs() {
+		return log;
 	}
 	
 

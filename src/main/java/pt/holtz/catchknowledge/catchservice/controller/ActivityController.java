@@ -22,14 +22,12 @@ import pt.holtz.catchknowledge.catchservice.jsonobjects.JSONConfigParameters;
 import pt.holtz.catchknowledge.catchservice.jsonobjects.JSONDeployActivity;
 import pt.holtz.catchknowledge.catchservice.model.Activity;
 import pt.holtz.catchknowledge.catchservice.model.Student;
-import pt.holtz.catchknowledge.catchservice.service.ActivityService;
-import pt.holtz.catchknowledge.catchservice.service.InMemoryActivityService;
+import pt.holtz.catchknowledge.catchservice.service.database.ActivityService;
+import pt.holtz.catchknowledge.catchservice.service.database.InMemoryActivityService;
 import pt.holtz.catchknowledge.catchservice.utils.JsonUtils;
 
 @RestController
 public class ActivityController {
-	
-	ActivityService activityService = InMemoryActivityService.getInstance();
 	
 	@Autowired
 	private CatchFacade appFacate;
@@ -47,9 +45,7 @@ public class ActivityController {
 			consumes = { MediaType.APPLICATION_JSON_VALUE /*,MediaType.MULTIPART_FORM_DATA_VALUE*/ },
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> receiveActivityDeploy(@RequestBody JSONDeployActivity deploy) throws JsonProcessingException{
-		appFacate.manageDeployActivity(deploy);
-		
-		return new ResponseEntity<String>(appFacate.getResponseUrl(),HttpStatus.OK);
+		return new ResponseEntity<String>(appFacate.manageDeployActivity(deploy),HttpStatus.OK);
 	}
 	
 	//in: activityID
@@ -57,6 +53,11 @@ public class ActivityController {
 	@PostMapping(path="/iap")
 	public ResponseEntity<Map<String,Object>> displayActivityAnalytics(@RequestBody String activityID){
 		return new ResponseEntity<Map<String,Object>>(appFacate.getAllStudentsAnalyticsByActivity(activityID),HttpStatus.OK);
+	}
+	
+	@GetMapping(path="/appLogs")
+	public ResponseEntity<Map<String,String>> retrieveAppLogs(){
+		return new ResponseEntity<Map<String,String>>(appFacate.getAllApplicationLogs(),HttpStatus.OK);
 	}
 	
 	
