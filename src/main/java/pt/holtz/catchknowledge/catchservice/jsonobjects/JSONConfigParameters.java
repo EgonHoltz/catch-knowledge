@@ -17,7 +17,7 @@ public class JSONConfigParameters {
 		this.activityID = Activity.getInstance().getActivityID();
 		this.activityName = Activity.getInstance().getActivityName();
 		this.configUrl = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"/files/form.html";
-		this.jsonParams = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"f/iles/config_fields.json";
+		this.jsonParams = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"/files/config_fields.json";
 		this.userUrl = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"/files/student.html";
 		this.analytics = ServletUriComponentsBuilder.fromCurrentServletMapping().toUriString()+"/files/analytics.json";
 	}
