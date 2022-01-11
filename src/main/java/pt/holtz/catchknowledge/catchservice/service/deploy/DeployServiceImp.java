@@ -14,7 +14,6 @@ public class DeployServiceImp implements IDeployService{
 	
 	@Override
 	public String manageDeployActivity(JSONDeployActivity deploy) {
-		// TODO Auto-generated method stub
 		deploy.toString();
 		Student student = activityService.addStudent(deploy.getInveniraStdId());
 		Activity activity = deploy.getActivity();
