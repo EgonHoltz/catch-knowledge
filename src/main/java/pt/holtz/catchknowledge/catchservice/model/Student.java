@@ -36,27 +36,14 @@ public class Student {
 	public void setStudentAnswers(List<StudentAnswer> studentAnswers) {
 		this.studentAnswers = studentAnswers;
 	}
+	public void addStudentAnswer(StudentAnswer studentAnswer) {
+		this.studentAnswers.add(studentAnswer);
+	}
 	public void addArticle(Article article) {
 		if (CollectionUtils.isEmpty(articles)) {
 			this.articles = new ArrayList<Article>();
 		}
-		this.articles.add(article);
-		// every time that a Student add an Article, 
-		// a fake analytics will be added
-		ArrayList<Question> questions= article.getQuestions();
-		if (!CollectionUtils.isEmpty(questions)) {
-			for (Question question : questions) {
-				StudentAnswer stdAnswer = new StudentAnswer(question);
-				stdAnswer.setAnswer("bla bla bla bla "+(1L + (long) (Math.random() * (50L - 1L))));
-				AnswerAnalytics answAnalytics = new AnswerAnalytics();
-				answAnalytics.setChangedPage((1L + (long) (Math.random() * (50L - 1L))));
-				answAnalytics.setDurationTime(Duration.ofMinutes((1 + (int) (Math.random() * (50 - 1)))));
-				answAnalytics.setIdleTime(Duration.ofMinutes((1 + (int) (Math.random() * (50 - 1)))));
-				stdAnswer.setAnswerAnalytics(answAnalytics);
-				this.studentAnswers.add(stdAnswer);
-			}
-		}
-		
+		this.articles.add(article);		
 	}
 
 	
