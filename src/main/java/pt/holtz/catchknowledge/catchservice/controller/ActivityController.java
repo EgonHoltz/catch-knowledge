@@ -1,8 +1,5 @@
 package pt.holtz.catchknowledge.catchservice.controller;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import pt.holtz.catchknowledge.catchservice.facade.CatchFacade;
 import pt.holtz.catchknowledge.catchservice.jsonobjects.JSONConfigParameters;
 import pt.holtz.catchknowledge.catchservice.jsonobjects.JSONDeployActivity;
-import pt.holtz.catchknowledge.catchservice.model.Activity;
-import pt.holtz.catchknowledge.catchservice.model.Student;
-import pt.holtz.catchknowledge.catchservice.service.database.ActivityService;
-import pt.holtz.catchknowledge.catchservice.service.database.InMemoryActivityService;
-import pt.holtz.catchknowledge.catchservice.utils.JsonUtils;
 
 @RestController
 public class ActivityController {

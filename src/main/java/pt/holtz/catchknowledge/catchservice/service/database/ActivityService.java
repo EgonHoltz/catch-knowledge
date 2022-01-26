@@ -2,7 +2,6 @@ package pt.holtz.catchknowledge.catchservice.service.database;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import pt.holtz.catchknowledge.catchservice.model.Article;

@@ -12,9 +12,6 @@ import pt.holtz.catchknowledge.catchservice.proxy.ProxyDeployLogger;
 import pt.holtz.catchknowledge.catchservice.proxy.ProxyIAPLogger;
 import pt.holtz.catchknowledge.catchservice.service.database.ActivityService;
 import pt.holtz.catchknowledge.catchservice.service.database.InMemoryActivityService;
-import pt.holtz.catchknowledge.catchservice.service.deploy.IDeployService;
-import pt.holtz.catchknowledge.catchservice.service.iap.IIAPService;
-import pt.holtz.catchknowledge.catchservice.service.param.IActivityParameters;
 
 @Service
 public class CatchFacade {

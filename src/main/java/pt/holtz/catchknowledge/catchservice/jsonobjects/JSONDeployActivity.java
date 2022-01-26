@@ -1,7 +1,5 @@
 package pt.holtz.catchknowledge.catchservice.jsonobjects;
 
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 

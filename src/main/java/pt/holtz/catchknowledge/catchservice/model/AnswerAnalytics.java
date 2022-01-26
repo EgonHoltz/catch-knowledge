@@ -1,7 +1,6 @@
 package pt.holtz.catchknowledge.catchservice.model;
 
 import java.time.Duration;
-import java.time.LocalTime;
 import java.util.List;
 
 public class AnswerAnalytics {
