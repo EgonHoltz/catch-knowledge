@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import pt.holtz.catchknowledge.catchservice.utils.JsonUtils;
 
 public class Student {
 	private String inveniraStdID;
@@ -43,5 +46,33 @@ public class Student {
 		this.articles.add(article);		
 	}
 
+	public List<Object> produceQuantitativeMap(){
+		List<Object> qttObjects = new ArrayList<Object>();
+		for (StudentAnswer stdAnswer : this.getStudentAnswers()){
+			AnswerAnalytics aa = stdAnswer.getAnswerAnalytics();
+			qttObjects.add(JsonUtils.extractToMap("Tempo de duração na atividade",aa.getDurationTime().toString()));
+			qttObjects.add(JsonUtils.extractToMap("Tempo de duração na atividade",aa.getIdleTime().toString()));
+			qttObjects.add(JsonUtils.extractToMap("Alterações de tela durante atividade",String.valueOf(aa.getChangedPage())));
+			qttObjects.add(JsonUtils.extractToMap("Pergunta",stdAnswer.getQuestion().getQuestionStr()));
+		}
+		
+		return qttObjects;
+		
+	}
 	
+	public List<Object> produceQualityMap() {
+		List<Object> qltObjects = new ArrayList<Object>();
+
+		String studentUrl = ServletUriComponentsBuilder
+				.fromCurrentServletMapping()
+				.toUriString() + "?APAnID=" + this.getInveniraStdID();
+		qltObjects.add(JsonUtils.extractToMap("Student activity profile", studentUrl));
+
+		String activityUrl = ServletUriComponentsBuilder
+				.fromCurrentServletMapping()
+				.toUriString() + "?APAnID=" + Activity.getInstance().getActivityID();
+		qltObjects.add(JsonUtils.extractToMap("Actitivy Heat Map", activityUrl));
+		
+		return qltObjects;
+	}
 }

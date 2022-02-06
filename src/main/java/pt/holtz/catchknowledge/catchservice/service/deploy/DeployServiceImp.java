@@ -1,5 +1,6 @@
 package pt.holtz.catchknowledge.catchservice.service.deploy;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import pt.holtz.catchknowledge.catchservice.jsonobjects.JSONDeployActivity;
@@ -10,6 +11,7 @@ import pt.holtz.catchknowledge.catchservice.observer.StudentListener;
 import pt.holtz.catchknowledge.catchservice.service.database.ActivityService;
 import pt.holtz.catchknowledge.catchservice.service.database.InMemoryActivityService;
 
+@Service
 public class DeployServiceImp implements IDeployService{
 	
 	ActivityService activityService = InMemoryActivityService.getInstance();
